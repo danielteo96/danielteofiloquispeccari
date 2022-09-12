@@ -1,0 +1,17 @@
+
+<header>
+  <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu color="primary" #menu="matMenu" [overlapTrigger]="false">
+    <span (mouseleave)="menuTrigger.closeMenu()">
+     
+      <button mat-menu-item [routerLink]="['/trabajador']">
+        <mat-icon>people_outline</mat-icon>
+        <span>Listar Trabajador </span>
+      </button>
+    
+    </span>
+  </mat-menu>
+  
+</header>

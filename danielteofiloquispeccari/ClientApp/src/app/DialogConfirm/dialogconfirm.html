@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Eliminar Dato</h1>
+<div mat-dialog-content>
+  Desea Eliminar?
+</div>
+<div mat-dialog-actions>
+  <!--<button mat-button mat-dialog-close>No</button>-->
+  
+
+</div>
+<button class="dialogconfirm" (click)="eliminar()" mat-raised-button color="primary">Eliminar</button>
+
+  <button class="dialogconfirm" 
+  md-dialog-close (click)="onNoClick()" mat-button color="primary">Cancelar</button>

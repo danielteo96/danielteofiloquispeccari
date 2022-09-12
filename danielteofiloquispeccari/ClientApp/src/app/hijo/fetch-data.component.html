@@ -1,0 +1,89 @@
+<h1 id="tableLabel">Lista de Hijos</h1>
+
+ 
+<p></p>
+
+
+<div [formGroup]="hijosForm" class="formhijocontainer">
+
+  <mat-form-field hintLabel="Max 10 characters" appearance="fill" class="entradatexto">
+    <mat-label>ID hijos</mat-label>
+    <input formControlName="idhijo" class="entradatexto" matInput #input 
+    maxlength="10" placeholder="id" autocomplete="off">
+    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+ 
+  </mat-form-field>
+  <br />
+  <mat-form-field hintLabel="Max 100 characters" appearance="fill" class="entradatexto">
+    <mat-label>Nombres Completos</mat-label>
+    <input formControlName="nombrecompleto" class="entradatexto" matInput #input 
+    maxlength="100" placeholder="Ingrese Nombres" autocomplete="off">
+    <mat-hint align="end">{{input.value?.length || 0}}/100</mat-hint>
+ 
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill" class="entradatexto">
+    <mat-label>Fecha de Nacimiento</mat-label>
+    <input formControlName="fechaNac"  matInput [matDatepicker]="datepicker" autocomplete="off">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+    <mat-datepicker #datepicker>
+      <mat-datepicker-actions>
+        <button mat-button matDatepickerCancel>Cancelar</button>
+        <button mat-raised-button color="primary"  matDatepickerApply>Agregar</button>
+      </mat-datepicker-actions>
+    </mat-datepicker>
+  </mat-form-field>
+   
+</div>
+<div class="button-options">
+<button mat-raised-button color="primary" (click)="agregar()" >Agregar Hijo</button>
+<button mat-raised-button color="warn" (click)="onNoClick()" >Salir</button>
+</div>
+<p></p>
+
+ 
+
+<p *ngIf="!dataSource"><em>Loading...</em></p>
+<form class="example-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Filtrar Hijos</mat-label>
+    <input matInput placeholder="filtrar" value="" autocomplete="off">
+  </mat-form-field>
+</form> 
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+   
+  <ng-container matColumnDef="idHijo">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element.idhijo}} </td>
+  </ng-container>
+   
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nombres </th>
+    <td mat-cell *matCellDef="let element"> {{element.nombrecompleto}} </td>
+  </ng-container>
+   
+  <ng-container matColumnDef="fechaNacimiento">
+    <th mat-header-cell *matHeaderCellDef> Fecha Nacimiento </th>
+    <td mat-cell *matCellDef="let element"> {{element.fechaNac| date: "dd.MM.yyyy"}} </td>
+  </ng-container>
+
+  Symbol Column
+  <ng-container matColumnDef="opciones">
+    <th mat-header-cell *matHeaderCellDef> Opciones </th>
+    <td mat-cell *matCellDef="let element">
+
+      <button (click)="borrarDialog(element)" mat-raised-button aria-label="active icon button with a delete icon">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button (click)="editar(element)" mat-raised-button aria-label=" icon button with a edit icon">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
